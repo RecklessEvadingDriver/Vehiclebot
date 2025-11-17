@@ -20,14 +20,18 @@ import asyncio
 from datetime import datetime, timedelta
 from typing import Dict, Any, Optional, List
 from io import BytesIO
+from dotenv import load_dotenv
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import (
     Application, CommandHandler, MessageHandler, filters, 
     ContextTypes, CallbackQueryHandler, ConversationHandler
 )
 
+# Load environment variables from .env file
+load_dotenv()
+
 # ===== CONFIGURATION =====
-BOT_TOKEN = os.getenv("BOT_TOKEN", "8229904939:AAEUG82rLWg2dPq0LCZFzx-gmuPIjJAE38w)
+BOT_TOKEN = os.getenv("BOT_TOKEN", "YOUR_BOT_TOKEN_HERE")
 API_BASE = "https://vvvin-ng.vercel.app/lookup?rc="
 ADMIN_IDS = list(map(int, os.getenv("ADMIN_IDS", "").split(","))) if os.getenv("ADMIN_IDS") else [8284333794]
 DATABASE_FILE = "vehicle_intel.db"
