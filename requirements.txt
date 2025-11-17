@@ -18,15 +18,15 @@ python-dateutil==2.8.2
 pytz==2023.3
 
 # ===== SECURITY & ENCRYPTION =====
-cryptography==41.0.4
-pyOpenSSL==23.2.0
+cryptography==46.0.3
+pyOpenSSL==25.3.0
 
 # ===== LOGGING & MONITORING =====
 loguru==0.7.2
 psutil==5.9.6
 
 # ===== ASYNCIO ENHANCEMENTS =====
-aiohttp==3.9.0
+aiohttp==3.9.4
 asyncio-throttle==1.0.2
 
 # ===== ENVIRONMENT MANAGEMENT =====
