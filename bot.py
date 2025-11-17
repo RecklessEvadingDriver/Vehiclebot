@@ -27,11 +27,11 @@ from telegram.ext import (
 )
 
 # ===== CONFIGURATION =====
-BOT_TOKEN = os.getenv("BOT_TOKEN", "YOUR_BOT_TOKEN_HERE")
+BOT_TOKEN = os.getenv("BOT_TOKEN", "8229904939:AAEUG82rLWg2dPq0LCZFzx-gmuPIjJAE38w)
 API_BASE = "https://vvvin-ng.vercel.app/lookup?rc="
-ADMIN_IDS = list(map(int, os.getenv("ADMIN_IDS", "").split(","))) if os.getenv("ADMIN_IDS") else []
+ADMIN_IDS = list(map(int, os.getenv("ADMIN_IDS", "").split(","))) if os.getenv("ADMIN_IDS") else [8284333794]
 DATABASE_FILE = "vehicle_intel.db"
-MAX_QUERIES_PER_DAY = int(os.getenv("MAX_QUERIES_PER_DAY", "50"))
+MAX_QUERIES_PER_DAY = int(os.getenv("MAX_QUERIES_PER_DAY", "10"))
 CACHE_EXPIRY_HOURS = 24
 
 # Enable comprehensive logging
