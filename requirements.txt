@@ -8,7 +8,7 @@ urllib3==2.0.7
 httpx==0.24.1
 
 # ===== DATABASE & STORAGE =====
-sqlite3
+# sqlite3 is a built-in Python module, not a pip package
 
 # ===== DATA PROCESSING =====
 pandas==2.1.1

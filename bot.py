@@ -8,6 +8,7 @@ import requests
 import json
 import time
 import sqlite3
+import os
 from datetime import datetime, timedelta
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import (
@@ -16,7 +17,8 @@ from telegram.ext import (
 )
 
 # ===== CONFIGURATION =====
-BOT_TOKEN = "8229904939:AAEUG82rLWg2dPq0LCZFzx-gmuPIjJAE38w"
+# Use environment variable for production deployment (Railway), fallback to hardcoded for local testing
+BOT_TOKEN = os.getenv("BOT_TOKEN", "8229904939:AAEUG82rLWg2dPq0LCZFzx-gmuPIjJAE38w")
 API_BASE = "https://vvvin-ng.vercel.app/lookup?rc="
 ADMIN_IDS = [8284333794]  # Your Telegram ID
 DATABASE_FILE = "vehicle_intel.db"
