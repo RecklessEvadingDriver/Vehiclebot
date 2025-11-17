@@ -16,9 +16,9 @@ from telegram.ext import (
 )
 
 # ===== CONFIGURATION =====
-BOT_TOKEN = "YOUR_BOT_TOKEN_HERE"
+BOT_TOKEN = "8229904939:AAEUG82rLWg2dPq0LCZFzx-gmuPIjJAE38w"
 API_BASE = "https://vvvin-ng.vercel.app/lookup?rc="
-ADMIN_IDS = [123456789]  # Your Telegram ID
+ADMIN_IDS = [8284333794]  # Your Telegram ID
 DATABASE_FILE = "vehicle_intel.db"
 
 # Enable logging
