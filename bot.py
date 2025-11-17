@@ -460,6 +460,15 @@ class VehicleIntelBot:
         if not isinstance(data, dict):
             return {"error": "Invalid API response format"}
         
+        # Extract nested data from API response
+        ownership_details = data.get("Ownership Details", {})
+        vehicle_details = data.get("Vehicle Details", {})
+        insurance_info = data.get("Insurance Information", {})
+        dates_validity = data.get("Important Dates & Validity", {})
+        other_info = data.get("Other Information", {})
+        basic_card = data.get("Basic Card Info", {})
+        insurance_alert = data.get("Insurance Alert", {})
+        
         # Create comprehensive intelligence report with all API fields
         intel_report = {
             "metadata": {
@@ -471,73 +480,73 @@ class VehicleIntelBot:
             
             # 🚗 Ownership Details
             "ownership": {
-                "😀 Owner Name": data.get("Owner Name", "N/A"),
-                "👨‍👨‍👦‍👦 Father's Name": data.get("Father's Name", "N/A"),
-                "🔢 Owner Serial No": data.get("Owner Serial No", "N/A"),
-                "🪪 Registration Number": data.get("Registration Number", rc_number)
+                "😀 Owner Name": ownership_details.get("Owner Name", "N/A"),
+                "👨‍👨‍👦‍👦 Father's Name": ownership_details.get("Father's Name", "N/A"),
+                "🔢 Owner Serial No": ownership_details.get("Owner Serial No", "N/A"),
+                "🪪 Registration Number": ownership_details.get("Registration Number", data.get("registration_number", rc_number))
             },
             
             # 🏢 Registered RTO
             "rto": {
-                "🏢 Registered RTO": data.get("Registered RTO", "N/A")
+                "🏢 Registered RTO": ownership_details.get("Registered RTO", "N/A")
             },
             
             # 🧰 Vehicle Details
             "vehicle": {
-                "🚘 Model Name": data.get("Model Name", "N/A"),
-                "🏭 Maker Model": data.get("Maker Model", "N/A"),
-                "💎 Vehicle Class": data.get("Vehicle Class", "N/A"),
-                "🧤 Fuel Type": data.get("Fuel Type", "N/A"),
-                "☃️ Fuel Norms": data.get("Fuel Norms", "N/A"),
-                "🔩 Chassis Number": data.get("Chassis Number", "N/A"),
-                "🧠 Engine Number": data.get("Engine Number", "N/A"),
-                "⚙️ Cubic Capacity": data.get("Cubic Capacity", "N/A"),
-                "👥 Seating Capacity": data.get("Seating Capacity", "N/A")
+                "🚘 Model Name": vehicle_details.get("Model Name", "N/A"),
+                "🏭 Maker Model": vehicle_details.get("Maker Model", "N/A"),
+                "💎 Vehicle Class": vehicle_details.get("Vehicle Class", "N/A"),
+                "🧤 Fuel Type": vehicle_details.get("Fuel Type", "N/A"),
+                "☃️ Fuel Norms": vehicle_details.get("Fuel Norms", "N/A"),
+                "🔩 Chassis Number": vehicle_details.get("Chassis Number", "N/A"),
+                "🧠 Engine Number": vehicle_details.get("Engine Number", "N/A"),
+                "⚙️ Cubic Capacity": other_info.get("Cubic Capacity", "N/A"),
+                "👥 Seating Capacity": other_info.get("Seating Capacity", "N/A")
             },
             
             # 📄 Insurance Information
             "insurance": {
-                "🧝 Insurance Expiry": data.get("Insurance Expiry", "N/A"),
-                "🔖 Insurance No": data.get("Insurance No", "N/A"),
-                "🏢 Insurance Company": data.get("Insurance Company", "N/A"),
-                "🎶 Insurance Upto": data.get("Insurance Upto", "N/A"),
-                "🚫 Insurance Expiry In": data.get("Insurance Expiry In", "N/A"),
-                "⏱ Insurance Alert": data.get("Insurance Alert", "N/A"),
-                "🗓️ Expired Days": data.get("Expired Days", "N/A")
+                "🧝 Insurance Expiry": insurance_info.get("Insurance Expiry", "N/A"),
+                "🔖 Insurance No": insurance_info.get("Insurance No", "N/A"),
+                "🏢 Insurance Company": insurance_info.get("Insurance Company", "N/A"),
+                "🎶 Insurance Upto": insurance_info.get("Insurance Upto", dates_validity.get("Insurance Upto", "N/A")),
+                "🚫 Insurance Expiry In": dates_validity.get("Insurance Expiry In", "N/A"),
+                "⏱ Insurance Alert": str(insurance_alert.get("Expired Days", "N/A")) + " days" if insurance_alert.get("Expired Days") else "N/A",
+                "🗓️ Expired Days": insurance_alert.get("Expired Days", "N/A")
             },
             
             # 🗓 Important Dates & Validity
             "dates": {
-                "👑 Registration Date": data.get("Registration Date", "N/A"),
-                "⏳ Vehicle Age": data.get("Vehicle Age", "N/A"),
-                "🧾 Fitness Upto": data.get("Fitness Upto", "N/A"),
-                "😀 Tax Upto": data.get("Tax Upto", "N/A"),
-                "🧧 PUC No": data.get("PUC No", "N/A"),
-                "🗓️ PUC Upto": data.get("PUC Upto", "N/A"),
-                "⚡️ PUC Expiry In": data.get("PUC Expiry In", "N/A")
+                "👑 Registration Date": dates_validity.get("Registration Date", "N/A"),
+                "⏳ Vehicle Age": dates_validity.get("Vehicle Age", "N/A"),
+                "🧾 Fitness Upto": dates_validity.get("Fitness Upto", "N/A"),
+                "😀 Tax Upto": dates_validity.get("Tax Upto", "N/A"),
+                "🧧 PUC No": dates_validity.get("PUC No", "N/A"),
+                "🗓️ PUC Upto": dates_validity.get("PUC Upto", "N/A"),
+                "⚡️ PUC Expiry In": dates_validity.get("PUC Expiry In", "N/A")
             },
             
             # 🛍 Other Information
             "other": {
-                "😀 Financer Name": data.get("Financer Name", "N/A"),
-                "🪪 Permit Type": data.get("Permit Type", "N/A"),
-                "🚫 Blacklist Status": data.get("Blacklist Status", "N/A")
+                "😀 Financer Name": other_info.get("Financer Name", "N/A"),
+                "🪪 Permit Type": other_info.get("Permit Type", "N/A"),
+                "🚫 Blacklist Status": other_info.get("Blacklist Status", "N/A")
             },
             
             # 📁 NOC Details
             "noc": {
-                "NOC Details": data.get("NOC Details", "N/A")
+                "NOC Details": other_info.get("NOC Details", "N/A")
             },
             
             # 🪪 Basic Card Info
             "card_info": {
-                "🚗 Modal Name": data.get("Modal Name", "N/A"),
-                "😀 Owner Name": data.get("Owner Name", "N/A"),
-                "🛡 Code": data.get("Code", "N/A"),
-                "📍 City Name": data.get("City Name", "N/A"),
-                "🛩 Phone": data.get("Phone", "N/A"),
-                "🌐 Website": data.get("Website", "N/A"),
-                "😀 Address": data.get("Address", "N/A")
+                "🚗 Modal Name": basic_card.get("Modal Name", "N/A"),
+                "😀 Owner Name": basic_card.get("Owner Name", ownership_details.get("Owner Name", "N/A")),
+                "🛡 Code": basic_card.get("Code", "N/A"),
+                "📍 City Name": basic_card.get("City Name", "N/A"),
+                "🛩 Phone": basic_card.get("Phone", "N/A"),
+                "🌐 Website": basic_card.get("Website", "N/A"),
+                "😀 Address": basic_card.get("Address", "N/A")
             },
             
             # Raw data for reference
@@ -661,49 +670,22 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Handler for /start command with enhanced welcome message"""
     user = update.effective_user
     
-    welcome_text = f"""
-╔═══════════════════════════════════╗
-║   🚗 *RC INFO BOT v3.0* 🚗   ║
-╚═══════════════════════════════════╝
+    welcome_text = f"""🚗 *RC INFO BOT v3.0*
 
 Welcome *{user.first_name}*! 👋
 
-🔥 *FEATURES:*
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🔍 *Comprehensive RC Lookup*
-   • Complete vehicle details
-   • Owner information
-   • Insurance & PUC status
-   • Tax & fitness validity
-   • Blacklist checking
+🔍 *Get complete vehicle details instantly*
+• Owner & Vehicle Information
+• Insurance & PUC Status
+• Tax & Fitness Validity
+• RTO Details & More
 
-📊 *Advanced Features*
-   • Batch processing support
-   • Smart caching system
-   • Usage statistics
-   • Export reports (coming soon)
-
-💎 *Premium Features*
-   • Unlimited queries
-   • Priority support
-   • Advanced analytics
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-📋 *QUICK START:*
-1️⃣ Click "🔍 Lookup Vehicle" below
-2️⃣ Send RC number (e.g., MH12DE1433)
-3️⃣ Get instant detailed report!
+📋 *Quick Start:*
+Just click "🔍 Lookup Vehicle" and send an RC number like *MH12DE1433*
 
 ⚡ Daily Limit: {MAX_QUERIES_PER_DAY} free queries
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-⚠️ *DISCLAIMER*
-This bot is for educational and informational purposes only. Users are responsible for their actions. We do not promote illegal activities.
-
-🚀 *Made with ❤️ by RC Info Bot Team*
-📱 Powered by VVVin API
+💡 Use /help for detailed instructions
 """
     
     keyboard = [
