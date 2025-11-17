@@ -5,7 +5,6 @@ python-telegram-bot[job-queue]==20.7
 # ===== HTTP REQUESTS & NETWORKING =====
 requests==2.31.0
 urllib3==2.0.7
-httpx==0.24.1
 
 # ===== DATABASE & STORAGE =====
 # sqlite3 is a built-in Python module, not a pip package
@@ -27,7 +26,7 @@ loguru==0.7.2
 psutil==5.9.6
 
 # ===== ASYNCIO ENHANCEMENTS =====
-aiohttp==3.8.5
+aiohttp==3.9.0
 asyncio-throttle==1.0.2
 
 # ===== ENVIRONMENT MANAGEMENT =====
