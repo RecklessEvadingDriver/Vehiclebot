@@ -9,31 +9,15 @@ urllib3==2.0.7
 # ===== DATABASE & STORAGE =====
 # sqlite3 is a built-in Python module, not a pip package
 
-# ===== DATA PROCESSING =====
-pandas==2.1.1
-openpyxl==3.1.2
-
 # ===== DATE/TIME HANDLING =====
 python-dateutil==2.8.2
-pytz==2023.3
-
-# ===== SECURITY & ENCRYPTION =====
-cryptography==46.0.3
-pyOpenSSL==25.3.0
-
-# ===== LOGGING & MONITORING =====
-loguru==0.7.2
-psutil==5.9.6
 
 # ===== ASYNCIO ENHANCEMENTS =====
 aiohttp==3.9.4
-asyncio-throttle==1.0.2
 
 # ===== ENVIRONMENT MANAGEMENT =====
 python-dotenv==1.0.0
-pyyaml==6.0.1
 
-# ===== UTILITIES =====
-colorama==0.4.6
-tqdm==4.66.1
-click==8.1.7
+# ===== OPTIONAL: DATA PROCESSING (for future export features) =====
+# pandas==2.1.1
+# openpyxl==3.1.2
